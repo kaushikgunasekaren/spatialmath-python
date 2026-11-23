@@ -198,7 +198,10 @@ class SO2(BasePoseMatrix):
         - 1, return an ndarray with shape=(2,2)
         - N>1, return ndarray with shape=(N,2,2)
         """
-        return self.A[:2, :2]
+        if len(self) == 1:
+            return self.A[:2, :2]
+        else:
+            return np.array([x[:2, :2] for x in self.A])
 
     def theta(self, unit="rad"):
         """
